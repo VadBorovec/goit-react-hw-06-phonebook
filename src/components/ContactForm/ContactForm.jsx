@@ -30,6 +30,7 @@ const schema = Yup.object().shape({
 export const ContactForm = () => {
   const [contacts, setContacts] = useState([]);
   const dispatch = useDispatch();
+
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     const contact = {
       id: shortid.generate(),
