@@ -4,6 +4,11 @@ import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'components/ui';
 import { StyledForm, Label, Input, Error } from './ContactForm.styled';
+import shortid from 'shortid';
+import { useDispatch } from 'react-redux';
+import { add } from 'redux/contactsSlice';
+import Notiflix from 'notiflix';
+import { useState } from 'react';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -22,9 +27,43 @@ const schema = Yup.object().shape({
 
 // !=====functional component
 
-export const ContactForm = ({ onSubmit }) => {
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    await onSubmit(values.name, values.number);
+export const ContactForm = () => {
+  const [contacts, setContacts] = useState([]);
+  const dispatch = useDispatch();
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    const contact = {
+      id: shortid.generate(),
+      name: values.name,
+      number: values.number,
+    };
+
+    const existingName = contacts.find(
+      contact => contact.name.toLowerCase() === values.name.toLowerCase()
+    );
+    const existingNumber = contacts.find(
+      contact =>
+        contact.number.replace(/[^\d]/g, '') ===
+        values.number.replace(/[^\d]/g, '')
+    );
+
+    if (existingName) {
+      Notiflix.Notify.failure(
+        `Contact with this name - ${contact.name} already exists!`
+      );
+      return;
+    } else if (existingNumber) {
+      Notiflix.Notify.failure(
+        `Contact with this number - ${contact.number} already exists!`
+      );
+      return;
+    } else {
+      // setContacts(prevContacts => [contact, ...prevContacts]);
+      dispatch(add(contact));
+      Notiflix.Notify.success(
+        `${contact.name} has been added to  your phonebook`
+      );
+    }
+    dispatch(add(contact));
     setSubmitting(false);
     resetForm();
   };
