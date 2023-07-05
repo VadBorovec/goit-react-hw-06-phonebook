@@ -1,7 +1,3 @@
-import { useState } from 'react';
-// import shortid from 'shortid';
-// import Notiflix from 'notiflix';
-
 import { Container, Section, Text } from 'components/ui';
 import {
   ContactFilter,
@@ -17,35 +13,20 @@ import { selectContact } from 'redux/selectors';
 
 export const App = () => {
   const contacts = useSelector(selectContact);
-  const [filter, setFilter] = useState('');
-
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
-  };
-
-  const visibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
 
   const totalContactCount = contacts.length;
 
   return (
     <Container>
       <Section title="Phonebook">
-        <ContactForm
-        // onSubmit={addContact}
-        />
-        <ContactFilter value={filter} onChange={changeFilter} />
+        <ContactForm />
+        <ContactFilter />
         <ContactStats totalContactCount={totalContactCount} />
 
         {contacts.length === 0 ? (
           <Text textAlign="center">There are no any numbers...</Text>
         ) : (
-          <ContactList contacts={visibleContacts()} />
+          <ContactList />
         )}
       </Section>
     </Container>

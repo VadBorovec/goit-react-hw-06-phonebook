@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import { ContactItem } from 'components';
 import { List, Item } from './ContactList.styled';
 import { useSelector } from 'react-redux';
-import { selectContact } from 'redux/selectors';
+import { visibleContacts } from 'redux/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(selectContact);
+  const contacts = useSelector(visibleContacts);
+
   return (
     <List>
       {contacts.map(({ id, name, number }) => (

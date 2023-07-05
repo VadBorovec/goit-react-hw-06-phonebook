@@ -48,11 +48,13 @@ export const ContactForm = () => {
       Notiflix.Notify.failure(
         `Contact with this name - ${contact.name} already exists!`
       );
+      setSubmitting(false);
       return;
     } else if (existingNumber) {
       Notiflix.Notify.failure(
         `Contact with this number - ${contact.number} already exists!`
       );
+      setSubmitting(false);
       return;
     }
 
@@ -60,8 +62,9 @@ export const ContactForm = () => {
       `${contact.name} has been added to  your phonebook`
     );
 
+    // setSubmitting(false);
     dispatch(add(contact));
-    setSubmitting(false);
+
     resetForm();
   };
 
