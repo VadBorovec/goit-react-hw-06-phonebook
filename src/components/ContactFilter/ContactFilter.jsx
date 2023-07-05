@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 export const ContactFilter = () => {
   const dispatch = useDispatch();
+  const handleFilter = e => dispatch(filtered(e.target.value));
 
   return (
     <Filter>
@@ -12,8 +13,8 @@ export const ContactFilter = () => {
         <Input
           type="text"
           name="filter"
-          placeholder="Filter list"
-          onChange={e => dispatch(filtered(e.target.value.trim()))}
+          placeholder="Enter name"
+          onChange={handleFilter}
         />
       </Label>
     </Filter>

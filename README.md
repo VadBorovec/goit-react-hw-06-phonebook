@@ -31,6 +31,7 @@ phone number, view their contacts, and filter contacts based on a search query.
 - prop-types: Runtime type checking for React props.
 - modern-normalize: Modern CSS reset styles.
 - react-scripts: Development and build scripts for React applications.
+- reduxjs/toolkit: For State management.
 
 ## Getting Started
 
