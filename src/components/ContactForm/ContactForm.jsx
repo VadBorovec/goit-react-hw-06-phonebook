@@ -28,7 +28,7 @@ const schema = Yup.object().shape({
 // !=====functional component
 
 export const ContactForm = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts] = useState([]);
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
@@ -64,7 +64,7 @@ export const ContactForm = () => {
         `${contact.name} has been added to  your phonebook`
       );
     }
-    dispatch(add(contact));
+    // dispatch(add(contact));
     setSubmitting(false);
     resetForm();
   };
@@ -109,57 +109,3 @@ export const ContactForm = () => {
 ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-
-// !====class
-
-// export class ContactForm extends Component {
-//   static propTypes = {
-//     onSubmit: PropTypes.func.isRequired,
-//   };
-
-//   state = {
-//     name: '',
-//     number: '',
-//   };
-
-//   handleSubmit = (values, { resetForm }) => {
-//     const { onSubmit } = this.props;
-
-//     onSubmit(values.name, values.number);
-//     resetForm();
-//   };
-
-//   render() {
-//     return (
-//       <Formik
-//         initialValues={{ name: '', number: '' }}
-//         validationSchema={schema}
-//         onSubmit={this.handleSubmit}
-//       >
-//         <StyledForm>
-//           <Label htmlFor="name">
-//             Name
-//             <Field
-//               type="text"
-//               name="name"
-//               as={Input}
-//               placeholder="Enter name"
-//             />
-//             <ErrorMessage name="name" component={Error} />
-//           </Label>
-//           <Label htmlFor="number">
-//             Number
-//             <Field
-//               type="text"
-//               name="number"
-//               as={Input}
-//               placeholder="Enter number"
-//             />
-//             <ErrorMessage name="number" component={Error} />
-//           </Label>
-//           <Button type="submit">Add contact</Button>
-//         </StyledForm>
-//       </Formik>
-//     );
-//   }
-// }

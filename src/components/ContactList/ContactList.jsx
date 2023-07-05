@@ -20,5 +20,4 @@ export const ContactList = ({ contacts }) => (
 //       number: PropTypes.string.isRequired,
 //     })
 //   ).isRequired,
-//   onDeleteContact: PropTypes.func.isRequired,
 // };
