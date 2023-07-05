@@ -2,7 +2,7 @@ import { useState } from 'react';
 // import shortid from 'shortid';
 // import Notiflix from 'notiflix';
 
-import { Container, Section } from 'components/ui';
+import { Container, Section, Text } from 'components/ui';
 import {
   ContactFilter,
   ContactForm,
@@ -41,7 +41,12 @@ export const App = () => {
         />
         <ContactFilter value={filter} onChange={changeFilter} />
         <ContactStats totalContactCount={totalContactCount} />
-        <ContactList contacts={visibleContacts()} />
+
+        {contacts.length === 0 ? (
+          <Text textAlign="center">There are no any numbers...</Text>
+        ) : (
+          <ContactList contacts={visibleContacts()} />
+        )}
       </Section>
     </Container>
   );
