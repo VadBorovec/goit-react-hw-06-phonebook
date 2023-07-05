@@ -1,1 +1,1 @@
-export { ContactFilter } from './ContactFilter';
+export * from './ContactFilter';
